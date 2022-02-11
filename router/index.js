@@ -1,4 +1,3 @@
-const getUsers = require("../controller")
 const login = require("./login")
 const register = require("./register")
 const data = require ("./data")
@@ -12,7 +11,7 @@ const homepage = (req,res) => {
 
 router.get("/",homepage)
 router.use("/data", data)
-// router.use("/register", register);
-// router.use("/login", login);
+router.use("/", register);
+router.use("/", login);
 
 module.exports = router

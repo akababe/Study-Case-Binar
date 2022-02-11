@@ -1,10 +1,7 @@
 const router = require("express").Router();
 const login = require("../controller/login");
+// const restrict = require('../middlewares/restrict')
 
-// // import middleware
-// const restrict = require('../middlewares/restrict');
-
-// router.post("/login", LoginController.login);
-// router.get("/whoami", restrict, LoginController.whoami);
+router.post("/login", login.login);
 
 module.exports = router;
