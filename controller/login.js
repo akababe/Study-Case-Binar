@@ -9,33 +9,6 @@ const generateToken = (id, username) => {
   return token;
 };
 
-// const checkPassword = (username, password) => bcrypt.compareSync(password, user.password);
-
-// authenticate = async ({ username, password }) => {
-//   try {
-//     const userCheck = await user.findOne({ where: { username } });
-//     if (!userCheck) return Promise.reject({ msg: "User not found!" });
-
-//     const isPasswordCorrect = checkPassword(userCheck, password);
-//     if (!isPasswordCorrect) return Promise.reject({ msg: "Wrong password!" });
-
-//     return Promise.resolve(userCheck);
-//   } catch (err) {
-//     return Promise.reject(err);
-//   }
-// };
-
-// login: (req, res, next) => {
-//     authenticate(req.body)
-//       .then((user) => {
-//         res.send(format(user));
-//       })
-//       .catch((err) => next(
-//         res.status(401).json(err), res
-//       ));
-//   },
-
-
 const login = async(req, res)=>{
     const {id, username, password} = req.body
     const userCheck =await pool.query('SELECT * FROM users WHERE username = $1', [username])
@@ -50,9 +23,7 @@ const login = async(req, res)=>{
           return {username,accessToken: generateToken(id, username)
           }
     }
-    
     return (res.json(releaseToken(id,username)))
-
 }
 
 module.exports = {
