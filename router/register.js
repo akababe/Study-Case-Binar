@@ -7,7 +7,7 @@ const regGet = (req,res) => {
     })
 }
 
-router.get("/register", regGet)
+router.get("/register", register.getDatas)
 router.post("/register", register.register)
 
 

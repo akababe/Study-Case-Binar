@@ -13,12 +13,22 @@ const register = async(req, res) => {
   
     pool.query('INSERT INTO users (id, username, password, email, role) VALUES ($1, $2,$3,$4,$5)', [inputId, username, encryptedPassword, email, role ], (error, results) => {
       if (error) {
-        throw error
+        throw res.json(error)
       }
       res.status(201).send(`User added : ${username}`)  
     })
   }
 
+const getDatas = (req, res) => {
+  pool.query('SELECT * FROM users', (error, results) => {
+    if (error) {
+      throw res.status(400).json(error)
+    }
+    res.status(200).json(results.rows)
+  })
+}
+
 module.exports = {
-    register
+    register,
+    getDatas
 }
