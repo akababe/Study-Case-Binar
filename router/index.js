@@ -11,7 +11,7 @@ const homepage = (req,res) => {
 
 router.get("/",homepage)
 router.use("/data", data)
-router.use("/", register);
-router.use("/", login);
+router.use("/api", register);
+router.use("/api", login);
 
 module.exports = router

@@ -11,7 +11,7 @@ const register = async(req, res) => {
     const encrypt = (password) => bcrypt.hashSync(password, 10);
     const encryptedPassword = encrypt(password);
   
-    pool.query('INSERT INTO users (id, username, password, email, country, city) VALUES ($1, $2,$3,$4,$5,$6)', [inputId, username, encryptedPassword, email, country, city ], (error, results) => {
+    pool.query('INSERT INTO users (id, username, password, email, country) VALUES ($1, $2,$3,$4,$5)', [inputId, username, encryptedPassword, email, role ], (error, results) => {
       if (error) {
         throw error
       }
