@@ -13,7 +13,7 @@ const register = async(req, res) => {
   
     pool.query('INSERT INTO users (id, username, password, email, role) VALUES ($1, $2,$3,$4,$5)', [inputId, username, encryptedPassword, email, role ], (error, results) => {
       if (error) {
-        throw res.json(error)
+        throw res.status(400).json(error)
       }
       res.status(201).send(`User added : ${username}`)  
     })
