@@ -14,10 +14,10 @@ const login = async(req, res)=>{
     const userCheck =await pool.query('SELECT * FROM users WHERE username = $1', [username])
     const isUserFind = userCheck.rowCount
 
-    if (!isUserFind) return (res.json("Id tidak ditemukan"))
+    if (!isUserFind) return (res.status(400).json("Id tidak ditemukan"))
     const checkPassword = (password) => bcrypt.compareSync(password, userCheck.rows[0].password)
     const isPasswordCorrect = checkPassword(password);
-    if (!isPasswordCorrect) return (res.json("passord salah"))
+    if (!isPasswordCorrect) return (res.status(400).json("password salah"))
 
     const releaseToken = (id, username) => {
           return {username,accessToken: generateToken(id, username)
