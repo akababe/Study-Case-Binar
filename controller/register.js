@@ -2,7 +2,7 @@ const pool = require("../config/config")
 const bcrypt = require("bcrypt");
 
 const register = async(req, res) => {
-    const { username, password, email, country, city } = req.body
+    const { username, password, email, role } = req.body
     const maxId = await pool.query('SELECT max(id) FROM users')
     const inputId = maxId.rows[0].max + 1
     // console.log(inputId)
