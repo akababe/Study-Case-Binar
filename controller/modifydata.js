@@ -1,12 +1,13 @@
 const pool = require("../config/config")
 
 const getDatas = (req, res) => {
-    pool.query('SELECT * FROM friends_house ORDER BY id ASC', (error, results) => {
-      if (error) {
-        throw error
-      }
-      res.status(200).json(results.rows)
-    })
+    // pool.query('SELECT * FROM friends_house ORDER BY id ASC', (error, results) => {
+    //   if (error) {
+    //     throw error
+    //   }
+    //   res.status(200).json(results.rows)
+    // })
+    res.status(200).json("API materials")
 }
 
 const getDataById = (req, res) => {

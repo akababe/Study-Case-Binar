@@ -1,6 +1,6 @@
 const login = require("./login")
 const register = require("./register")
-const data = require ("./data")
+const materials = require ("./materials")
 const router = require("express").Router()
 
 const homepage = (req,res) => {
@@ -10,7 +10,7 @@ const homepage = (req,res) => {
 }
 
 router.get("/",homepage)
-router.use("/data", data)
+router.use("/api", materials)
 router.use("/api", register);
 router.use("/api", login);
 
