@@ -16,9 +16,7 @@ const getDataById = (req, res) => {
       if (error) {
         throw res.status(400).json(error)
       }
-      res.status(200).json({data:
-        results.rows[0]
-      })
+      res.status(200).json(results.rows)
     })
   }
 
