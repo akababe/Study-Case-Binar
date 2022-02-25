@@ -5,7 +5,7 @@ const modifyData = require("../controller/modifydata");
 // const restrict = require('../middlewares/restrict');
 
 router.get("/materials", modifyData.getDatas);
-router.get("/materials/id", modifyData.getDataById)
+router.get("/materials/:mid", modifyData.getDataById)
 router.post("/materials", modifyData.createData)
 router.put("/materials", modifyData.updateData)
 router.delete("/materials", modifyData.deleteData)

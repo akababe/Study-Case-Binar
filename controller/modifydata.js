@@ -10,7 +10,7 @@ const getDatas = (req, res) => {
 }
 
 const getDataById = (req, res) => {
-    const mid = parseInt(req.query.mid)
+    const mid = parseInt(req.params.mid)
 
     pool.query('SELECT * FROM m_stock WHERE mid = $1', [mid], (error, results) => {
       if (error) {
@@ -35,7 +35,7 @@ const createData = async(req, res) => {
 }
 
 const updateData = (req, res) => {
-    const mid = parseInt(req.query.mid)
+    const mid = parseInt(req.params.mid)
     const { mat_desc, mat_in, mat_out, mat_rack, mat_vendor} = req.body
   
     pool.query(
@@ -50,7 +50,7 @@ const updateData = (req, res) => {
 }
 
 const deleteData = (req, res) => {
-    const mid = parseInt(req.query.mid)
+    const mid = parseInt(req.params.mid)
   
     pool.query('DELETE FROM m_stock WHERE mid = $1', [mid], (error, results) => {
       if (error) {
