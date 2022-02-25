@@ -7,7 +7,7 @@ const modifyData = require("../controller/modifydata");
 router.get("/materials", modifyData.getDatas);
 router.get("/materials/:mid", modifyData.getDataById)
 router.post("/materials", modifyData.createData)
-router.put("/materials", modifyData.updateData)
+router.put("/materials/:mid", modifyData.updateData)
 router.delete("/materials", modifyData.deleteData)
 
 // createData,
