@@ -25,7 +25,7 @@ const createData = async(req, res) => {
   const maxId = await pool.query('SELECT max(mid) FROM m_stock')
   const inputId = maxId.rows[0].max + 1
 
-  pool.query('INSERT INTO m_stock (mid, mat_desc, mat_in, mat_out, mat_rack, mat_vendor) VALUES ($1, $2,$3,$4,$5,$6)', [mat_desc, mat_in, mat_out, mat_rack, mat_vendor], (error, results) => {
+  pool.query('INSERT INTO m_stock (mid, mat_desc, mat_in, mat_out, mat_rack, mat_vendor) VALUES ($1, $2,$3,$4,$5,$6)', [inputId, mat_desc, mat_in, mat_out, mat_rack, mat_vendor], (error, results) => {
     if (error) {
       throw error
     }
@@ -52,11 +52,11 @@ const updateData = (req, res) => {
 const deleteData = (req, res) => {
     const mid = parseInt(req.query.mid)
   
-    pool.query('DELETE FROM m_stock WHERE mid = $1', [id], (error, results) => {
+    pool.query('DELETE FROM m_stock WHERE mid = $1', [mid], (error, results) => {
       if (error) {
         throw error
       }
-      res.status(200).json(`User deleted with ID: ${id}`)
+      res.status(200).json(`User deleted with ID: ${mid}`)
     })
   }
 
