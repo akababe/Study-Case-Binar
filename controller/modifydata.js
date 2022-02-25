@@ -10,8 +10,8 @@ const getDatas = (req, res) => {
 }
 
 const getDataById = (req, res) => {
-    const mid = parseInt(req.params.mid)
-  
+    const mid = parseInt(req.query.mid)
+
     pool.query('SELECT * FROM m_stock WHERE mid = $1', [mid], (error, results) => {
       if (error) {
         throw res.status(400).json(error)
