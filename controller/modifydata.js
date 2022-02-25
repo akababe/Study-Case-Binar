@@ -10,9 +10,9 @@ const getDatas = (req, res) => {
 }
 
 const getDataById = (req, res) => {
-    const id = parseInt(req.query.id)
+    const mid = parseInt(req.query.mid)
   
-    pool.query('SELECT * FROM friends_house WHERE id = $1', [id], (error, results) => {
+    pool.query('SELECT * FROM m_stock WHERE mid = $1', [mid], (error, results) => {
       if (error) {
         throw error
       }
@@ -21,38 +21,38 @@ const getDataById = (req, res) => {
   }
 
 const createData = async(req, res) => {
-  const { friends_name, address, house_color, flood_risk, floors } = req.body
-  const maxId = await pool.query('SELECT max(id) FROM friends_house')
+  const { mat_desc, mat_in, mat_out, mat_rack, mat_vendor } = req.body
+  const maxId = await pool.query('SELECT max(mid) FROM m_stock')
   const inputId = maxId.rows[0].max + 1
 
-  pool.query('INSERT INTO friends_house (id, friends_name, address, house_color, flood_risk, floors) VALUES ($1, $2,$3,$4,$5,$6)', [inputId, friends_name, address, house_color, flood_risk, floors], (error, results) => {
+  pool.query('INSERT INTO m_stock (mid, mat_desc, mat_in, mat_out, mat_rack, mat_vendor) VALUES ($1, $2,$3,$4,$5,$6)', [mat_desc, mat_in, mat_out, mat_rack, mat_vendor], (error, results) => {
     if (error) {
       throw error
     }
-    res.status(201).send(`User added : ${friends_name}`)  
+    res.status(201).send(`User added : ${mat_desc}`)  
   })
   
 }
 
 const updateData = (req, res) => {
-    const id = parseInt(req.query.id)
-    const { friends_name, address, house_color, flood_risk, floors } = req.body
+    const mid = parseInt(req.query.mid)
+    const { mat_desc, mat_in, mat_out, mat_rack, mat_vendor} = req.body
   
     pool.query(
-      'UPDATE friends_house SET friends_name =$1, address=$2, house_color=$3, flood_risk=$4, floors=$5 WHERE id=$6',
-      [friends_name, address, house_color, flood_risk, floors, id],
+      'UPDATE m_stock SET mat_desc =$1, mat_in=$2, mat_out=$3, mat_rack=$4, mat_vendor=$5 WHERE mid=$6',
+      [mat_desc, mat_in, mat_out, mat_rack, mat_vendor, mid],
       (error, results) => {
         if (error) {
           throw error
         }
-        res.status(200).send(`User modified with ID: ${id}`)
+        res.status(200).send(`User modified with ID: ${mid}`)
       })
 }
 
 const deleteData = (req, res) => {
-    const id = parseInt(req.query.id)
+    const mid = parseInt(req.query.mid)
   
-    pool.query('DELETE FROM friends_house WHERE id = $1', [id], (error, results) => {
+    pool.query('DELETE FROM m_stock WHERE mid = $1', [id], (error, results) => {
       if (error) {
         throw error
       }
