@@ -10,11 +10,11 @@ const getDatas = (req, res) => {
 }
 
 const getDataById = (req, res) => {
-    const mid = parseInt(req.query.mid)
+    const mid = parseInt(req.params.mid)
   
     pool.query('SELECT * FROM m_stock WHERE mid = $1', [mid], (error, results) => {
       if (error) {
-        throw error
+        throw res.status(400).json(error)
       }
       res.status(200).json(results.rows)
     })
@@ -27,7 +27,7 @@ const createData = async(req, res) => {
 
   pool.query('INSERT INTO m_stock (mid, mat_desc, mat_in, mat_out, mat_rack, mat_vendor) VALUES ($1, $2,$3,$4,$5,$6)', [inputId, mat_desc, mat_in, mat_out, mat_rack, mat_vendor], (error, results) => {
     if (error) {
-      throw error
+      throw res.status(400).json(error)
     }
     res.status(201).send(`User added : ${mat_desc}`)  
   })
@@ -43,7 +43,7 @@ const updateData = (req, res) => {
       [mat_desc, mat_in, mat_out, mat_rack, mat_vendor, mid],
       (error, results) => {
         if (error) {
-          throw error
+          throw res.status(400).json(error)
         }
         res.status(200).send(`User modified with ID: ${mid}`)
       })
@@ -54,7 +54,7 @@ const deleteData = (req, res) => {
   
     pool.query('DELETE FROM m_stock WHERE mid = $1', [mid], (error, results) => {
       if (error) {
-        throw error
+        throw res.status(400).json(error)
       }
       res.status(200).json(`User deleted with ID: ${mid}`)
     })
