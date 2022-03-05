@@ -21,11 +21,11 @@ const getDataById = (req, res) => {
   }
 
 const createData = async(req, res) => {
-  const { mat_desc, mat_in, mat_out, mat_rack, mat_vendor } = req.body
+  const { mat_desc, mat_in, mat_out, rack, vendor } = req.body
   const maxId = await pool.query('SELECT max(mid) FROM m_stock')
   const inputId = maxId.rows[0].max + 1
 
-  pool.query('INSERT INTO m_stock (mid, mat_desc, mat_in, mat_out, mat_rack, mat_vendor) VALUES ($1, $2,$3,$4,$5,$6)', [inputId, mat_desc, mat_in, mat_out, mat_rack, mat_vendor], (error, results) => {
+  pool.query('INSERT INTO m_stock (mid, mat_desc, mat_in, mat_out, rack, vendor) VALUES ($1, $2,$3,$4,$5,$6)', [inputId, mat_desc, mat_in, mat_out, rack, vendor], (error, results) => {
     if (error) {
       throw res.status(400).json(error)
     }
@@ -36,11 +36,11 @@ const createData = async(req, res) => {
 
 const updateData = (req, res) => {
     const mid = parseInt(req.params.mid)
-    const { mat_desc, mat_in, mat_out, mat_rack, mat_vendor} = req.body
+    const { mat_desc, mat_in, mat_out, rack, vendor} = req.body
   
     pool.query(
-      'UPDATE m_stock SET mat_desc =$1, mat_in=$2, mat_out=$3, mat_rack=$4, mat_vendor=$5 WHERE mid=$6',
-      [mat_desc, mat_in, mat_out, mat_rack, mat_vendor, mid],
+      'UPDATE m_stock SET mat_desc =$1, mat_in=$2, mat_out=$3, rack=$4, vendor=$5 WHERE mid=$6',
+      [mat_desc, mat_in, mat_out, rack, vendor, mid],
       (error, results) => {
         if (error) {
           throw res.status(400).json(error)
